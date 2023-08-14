@@ -19,6 +19,8 @@ const currentOperation = document.querySelector('.current-operation');
 const lastOperation = document.querySelector('.last-operation');
 
 let currentOperator = null;
+let isNewExpression = false;
+let isNewOperator = false;
 
 buttons.forEach(button => {
     button.addEventListener('click', () => {
@@ -27,6 +29,13 @@ buttons.forEach(button => {
 })
 
 function calculate(key){
+
+    if (isNewExpression === true)
+    {
+        lastOperation.textContent = "";
+        isNewExpression = false;
+    }
+
     const parsedKey = parseInt(key);
 
     if (isNaN(parsedKey))
@@ -46,6 +55,8 @@ function calculate(key){
 
 function inputOperator(key) {
 
+    isNewOperator = true;
+
     if (key === "CLEAR") {
         currentOperation.textContent = "";
         lastOperation.textContent = "";
@@ -64,7 +75,10 @@ function inputOperator(key) {
     }
 
     else if (key === "=") {
+        const buffer = lastOperation.textContent;
         evaluateExpression();
+        lastOperation.textContent = buffer + " = " + result;
+        isNewExpression = true;
     }
 
     else 
@@ -72,6 +86,7 @@ function inputOperator(key) {
         lastOperation.textContent += " " + key + " ";
         currentOperation.textContent = "";
     }
+
 }
 
 function evaluateExpression() {
@@ -101,4 +116,5 @@ function evaluateExpression() {
 
     lastOperation.textContent = result;
     currentOperation.textContent = "";
+    return result;
 }
