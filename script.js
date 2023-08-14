@@ -1,20 +1,4 @@
 const buttons = document.querySelectorAll('* button');
-const number7 = document.getElementById('number-7');
-const number8 = document.getElementById('number-8');
-const number9 = document.getElementById('number-9');
-const modulo = document.getElementById('modulo');
-const number4 = document.getElementById('number-4');
-const number5 = document.getElementById('number-5');
-const number6 = document.getElementById('number-6');
-const multiply = document.getElementById('multiply');
-const number1 = document.getElementById('number-1');
-const number2 = document.getElementById('number-2');
-const number3 = document.getElementById('number-3');
-const minus = document.getElementById('minus');
-const dot = document.getElementById('dot');
-const number0 = document.getElementById('number-0');
-const equals = document.getElementById('equals');
-const plus = document.getElementById('plus');
 const currentOperation = document.querySelector('.current-operation');
 const lastOperation = document.querySelector('.last-operation');
 
@@ -29,12 +13,6 @@ buttons.forEach(button => {
 })
 
 function calculate(key){
-
-    if (isNewExpression === true)
-    {
-        lastOperation.textContent = "";
-        isNewExpression = false;
-    }
 
     const parsedKey = parseInt(key);
 
@@ -55,7 +33,12 @@ function calculate(key){
 
 function inputOperator(key) {
 
-    isNewOperator = true;
+    
+    if (isNewOperator === true)
+    {
+        evaluateExpression();
+        isNewOperator = false;
+    }
 
     if (key === "CLEAR") {
         currentOperation.textContent = "";
@@ -77,12 +60,12 @@ function inputOperator(key) {
     else if (key === "=") {
         const buffer = lastOperation.textContent;
         evaluateExpression();
-        lastOperation.textContent = buffer + " = " + result;
-        isNewExpression = true;
+        lastOperation.textContent = buffer;
     }
 
     else 
     {
+        isNewOperator = true;
         lastOperation.textContent += " " + key + " ";
         currentOperation.textContent = "";
     }
@@ -118,3 +101,5 @@ function evaluateExpression() {
     currentOperation.textContent = "";
     return result;
 }
+
+// when  a new operator is used, we want to use the evaluate function and display the result
