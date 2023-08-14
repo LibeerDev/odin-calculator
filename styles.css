@@ -142,7 +142,7 @@ button:hover {
   border-top-left-radius: 5px;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
   #calculator{
     height: 90vh;
   }
