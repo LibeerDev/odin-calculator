@@ -58,7 +58,7 @@ button:hover {
 #calculator {
   display: flex;
   flex-direction: column;
-  background-image: url(images/texture-card-relief-gray.jpg);
+  background-image: url(images/gray.jpg);
   width: 80vw; /* Adjust width relative to viewport width */
   max-width: 400px; /* Limit maximum width */
   border-radius: 10px; /* Adjust border-radius value */
